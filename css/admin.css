@@ -11,13 +11,16 @@ body {
 .title img {
   max-width: 150px;
   height: auto;
+  
 }
 
 .nav {
   margin-left: 10px;
   padding-left: 10px;
   width: 20%;
+  height: 550px;
   border: 1px solid #ccc;
+  box-shadow: 0 0 20px black
 }
 
 
@@ -49,5 +52,14 @@ body {
 
 .nav li a:hover::after {
   width: 100%;
+}
+
+.content{
+  display: flex;
+}
+.content iframe{
+  width: 80%;
+  height: 100vh;
+  border: none;
 }
 
