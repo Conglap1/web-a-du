@@ -1,0 +1,37 @@
+<%- layout('layouts/lienhe-layout') %>
+<%- include('../elements/head') %>
+<body>
+  <%- include('../elements/header') %>
+  <%- include('../elements/nav') %>
+
+  <!-- Include Register and Login Modals -->
+  <%- include('../elements/register-modal') %>
+  <%- include('../elements/login-modal') %>
+
+  <main style="padding: 40px; background-color: #f5f5f5;">
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center;">
+      <!-- Cột trái: Thông tin công ty -->
+      <div style="flex: 1 1 400px;">
+        <h2>Thông tin liên hệ</h2>
+        <p><strong>Tên:</strong> Lon Xon Books</p>
+        <p><strong>Email:</strong> Lonxonbooks@example.com</p>
+        <p><strong>Điện thoại:</strong> +84901234567</p>
+        <p><strong>Địa chỉ:</strong> 180 Cao Lỗ, Quận 8, TP.HCM</p>
+        <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 6, 08:00 - 17:00</p>
+      </div>
+
+      <!-- Cột phải: Form liên hệ -->
+      <%- include('../elements/contact-form') %>
+    </div>
+  </main>
+
+  <section>
+    <h2>Thông tin liên hệ</h2>
+    <p>Liên hệ với chúng tôi để biết thêm thông tin chi tiết.</p>
+    <div class="contact-form">
+      <!-- Thêm form liên hệ -->
+    </div>
+  </section>
+
+  <%- include('../elements/footer') %>
+</body>

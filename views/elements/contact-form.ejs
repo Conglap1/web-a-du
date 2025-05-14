@@ -1,0 +1,33 @@
+<div style="flex: 1 1 400px;">
+  <h2>Gửi thông tin liên hệ</h2>
+  <form id="contact-form">
+    <div style="margin-bottom: 15px;">
+      <label for="name">Họ và tên:</label><br>
+      <input type="text" id="name" name="name" required style="width: 100%; padding: 10px;"
+        pattern="^[A-Za-zÀ-ỹ\s]+$" title="Chỉ nhập chữ, không bao gồm số hoặc ký tự đặc biệt">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required style="width: 100%; padding: 10px;">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label for="subject">Chủ đề:</label><br>
+      <input type="text" id="subject" name="subject" required style="width: 100%; padding: 10px;">
+      <div id="subject-error" style="color: red; font-size: 14px;"></div>
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label for="message">Nội dung:</label><br>
+      <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 10px;"></textarea>
+      <div id="message-error" style="color: red; font-size: 14px;"></div>
+    </div>
+    <div style="margin-bottom: 15px;">
+      <input type="checkbox" id="terms" required>
+      <label for="terms">
+        Tôi đồng ý với <a href="#" style="text-decoration: none;">Điều khoản dịch vụ</a> và
+        <a href="#" style="text-decoration: none;">Chính sách bảo mật</a>.
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Gửi</button>
+    <button type="reset" class="btn btn-primary">Xóa</button>
+  </form>
+</div>
