@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/cart.css" />
+    <title>Giỏ hàng - LonXon Books</title>
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32" />
+  </head>
+
+  <body>
+    <!-- ====== HEADER (đã tinh gọn & hợp lệ) ====== -->
+    <header>
+      <!-- thanh đăng nhập + logo + giỏ hàng -->
+      <ul class="login">
+        <!-- logo – đẩy mọi thứ sang phải nhờ margin-right:auto -->
+        <li class="left" style="margin-right: auto">
+          <a href="index.html" id="logo">
+            <img src="img/logo.png" alt="logo" />
+          </a>
+        </li>
+
+        <!-- icon giỏ hàng (đã dùng đúng .cart-icon-container) -->
+        <li class="cart-icon-container">
+          <!-- dùng href="cart.html" nếu muốn chuyển trang, 
+             hoặc href="#" + JS openCartModal() nếu muốn bật modal -->
+          <a href="#" id="cart-button">
+            <i class="fa-solid fa-shopping-cart cart-icon"></i>
+            <!-- .cart-count ẩn mặc định (CSS sẽ show khi >0) -->
+            <span class="cart-count" id="cart-count" style="display: none"
+              >0</span
+            >
+          </a>
+        </li>
+
+        <!-- nút đăng ký / đăng nhập -->
+        <li class="right"><a href="#" id="register-button">Đăng Ký</a></li>
+        <li class="right"><a href="#" id="login-button">Đăng Nhập</a></li>
+      </ul>
+
+      <!-- ====== NAV + SEARCH giữ nguyên ====== -->
+      <div class="nav-container">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav">
+          <li><a href="index.html">Trang Chủ</a></li>
+          <li><a href="index.html#gioithieu">Giới Thiệu</a></li>
+          <li><a href="sach.html">Sách</a></li>
+          <li><a href="dungcu.html">Dụng cụ</a></li>
+          <li><a href="quatang.html">Quà tặng</a></li>
+          <li><a href="lienhe.html">Liên Hệ</a></li>
+        </ul>
+
+        <div class="search">
+          <input type="text" placeholder="Search.." />
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="register-modal">
+      <div class="modal">
+        <button class="close-btn" id="register-close">&times;</button>
+        <h2>Đăng Ký</h2>
+        <form id="register-form">
+          <div class="form-group">
+            <label for="fullname">Họ và tên</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="Nhập họ và tên của bạn"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <input
+              type="email"
+              id="register-email"
+              name="email"
+              placeholder="Nhập email của bạn"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="register-password">Mật khẩu</label>
+            <input
+              type="password"
+              id="register-password"
+              name="password"
+              placeholder="Tạo mật khẩu"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Xác nhận mật khẩu</label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              placeholder="Nhập lại mật khẩu"
+              required
+            />
+          </div>
+          <div class="terms">
+            <input type="checkbox" id="agree-terms" required />
+            <label for="agree-terms"
+              >Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và
+              <a href="#">Chính sách bảo mật</a></label
+            >
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Đăng Ký</button>
+            <p>hoặc</p>
+            <a href="#"><img src="img/logogg.png" alt="gg" /></a>
+            <a href="#"><img src="img/logoface.png" alt="" /></a>
+          </div>
+          <div class="login-link">
+            Đã có tài khoản? <a href="#" id="switch-to-login">Đăng nhập ngay</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="login-modal">
+      <div class="modal">
+        <button class="close-btn" id="login-close">&times;</button>
+        <h2>Đăng Nhập</h2>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input
+              type="email"
+              id="login-email"
+              name="email"
+              placeholder="Nhập email của bạn"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="login-password">Mật khẩu</label>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              placeholder="Nhập mật khẩu của bạn"
+              required
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+            <a href="#" class="forgot-password">Quên mật khẩu?</a>
+          </div>
+          <div class="register-link">
+            Chưa có tài khoản?
+            <a href="#" id="switch-to-register">Đăng ký ngay</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+      <div class="cart-content">
+        <div class="cart-header">
+          <h2>Giỏ hàng của bạn</h2>
+          <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+          <!-- Dữ liệu giỏ hàng sẽ được điền vào đây bằng JavaScript -->
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total-container">
+            Tổng cộng: <span id="cart-total">0</span>
+          </div>
+          <div class="cart-actions">
+            <button class="clear-cart-btn" id="clear-cart-btn">
+              Xóa tất cả
+            </button>
+            <button class="checkout-btn" id="checkout-btn">Thanh toán</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+
+    <!-- Recommended Products -->
+    <div class="recommended-products">
+      <h2>Có thể bạn cũng thích</h2>
+      <div class="game-container">
+        <div class="game-item">
+          <div class="game-thumbnail no1"></div>
+          <div class="game-info">
+            <h3>Grand Theft Auto 5</h3>
+            <div class="product-price">500.000 VND</div>
+            <button class="add-to-cart-btn" data-id="game1">
+              <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+            </button>
+          </div>
+        </div>
+        <div class="game-item">
+          <div class="game-thumbnail no2"></div>
+          <div class="game-info">
+            <h3>ELDEN RING</h3>
+            <div class="product-price">800.000 VND</div>
+            <button class="add-to-cart-btn" data-id="game2">
+              <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+            </button>
+          </div>
+        </div>
+        <div class="game-item">
+          <div class="game-thumbnail no3"></div>
+          <div class="game-info">
+            <h3>Red Dead Redemption 2</h3>
+            <div class="product-price">600.000 VND</div>
+            <button class="add-to-cart-btn" data-id="game3">
+              <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container-footer">
+        <div class="footer-col">
+          <div class="title">
+            <a href="index.html"><img src="img/logo.png" alt="logo" /></a>
+            <h2>WebStorage</h2>
+          </div>
+          <p>
+            Cộng đồng chia sẻ nội dung, kiến thức hữu ích về công nghệ và giải
+            trí.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>
+              <span><i class="fa-solid fa-phone"></i></span> +84901621897
+            </li>
+            <li>
+              <span><i class="fa-solid fa-circle-user"></i></span> Phan Công Lập
+            </li>
+            <li>
+              <span><i class="fa-solid fa-circle-info"></i></span> D22_TH09
+            </li>
+            <li>
+              <span><i class="fa-solid fa-paper-plane"></i></span>
+              DH52200978@student.stu.edu.vn
+            </li>
+            <li>
+              <span><i class="fa-solid fa-film"></i></span> Thứ 2 ca 1
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Mạng xã hội</h3>
+          <p>Theo dõi các mạng xã hội để có được những thông tin mới nhất</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/eqrf04552" class="facebook">f</a>
+            <a href="#" class="pinterest">p</a>
+            <a href="#" class="linkedin">in</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright © 2014 - 2025. All rights reserved by WebStorage</p>
+      </div>
+    </footer>
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang">
+      <i class="fa-solid fa-caret-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/index.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+      // Thêm JS đặc biệt cho trang giỏ hàng
+      document.addEventListener("DOMContentLoaded", function () {
+        // Hiển thị danh sách giỏ hàng chi tiết trên trang
+        function renderCartPage() {
+          const cartItemsList = document.getElementById("cart-items-list");
+          const subtotalElement = document.getElementById("subtotal");
+          const totalElement = document.getElementById("total");
+          const emptyCartMessage = document.querySelector(
+            ".empty-cart-message"
+          );
+
+          if (!cartItemsList) return;
+
+          // Xóa nội dung cũ
+          cartItemsList.innerHTML = "";
+
+          // Nếu giỏ hàng trống
+          if (cart.length === 0) {
+            emptyCartMessage.style.display = "block";
+            subtotalElement.textContent = "0 VND";
+            totalElement.textContent = "30.000 VND"; // Phí vận chuyển
+            return;
+          }
+
+          emptyCartMessage.style.display = "none";
+          let subtotal = 0;
+
+          // Tạo danh sách sản phẩm trong giỏ hàng
+          cart.forEach((item) => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+
+            const cartItem = document.createElement("div");
+            cartItem.className = "cart-item-row";
+            cartItem.innerHTML = `
+              <div class="cart-product-info">
+                <div class="cart-product-image">
+                  <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="cart-product-details">
+                  <h4>${item.name}</h4>
+                </div>
+              </div>
+              <div class="cart-product-price">${formatCurrency(
+                item.price
+              )}</div>
+              <div class="cart-product-quantity">
+                <div class="quantity-control">
+                  <button class="quantity-btn minus" onclick="updateQuantity('${
+                    item.id
+                  }', ${item.quantity - 1})">-</button>
+                  <span>${item.quantity}</span>
+                  <button class="quantity-btn plus" onclick="updateQuantity('${
+                    item.id
+                  }', ${item.quantity + 1})">+</button>
+                </div>
+              </div>
+              <div class="cart-product-subtotal">${formatCurrency(
+                itemTotal
+              )}</div>
+              <div class="cart-product-action">
+                <button class="remove-item" onclick="removeFromCart('${
+                  item.id
+                }')">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            `;
+
+            cartItemsList.appendChild(cartItem);
+          });
+
+          // Cập nhật tổng tiền
+          subtotalElement.textContent = formatCurrency(subtotal);
+          const total = subtotal + 30000; // Cộng phí vận chuyển
+          totalElement.textContent = formatCurrency(total);
+        }
+
+        // Nút thanh toán trên trang
+        const checkoutBtnPage = document.getElementById("checkout-btn-page");
+        if (checkoutBtnPage) {
+          checkoutBtnPage.addEventListener("click", checkout);
+        }
+
+        // Áp dụng mã giảm giá
+        const applyPromoBtn = document.getElementById("apply-promo");
+        if (applyPromoBtn) {
+          applyPromoBtn.addEventListener("click", function () {
+            const promoInput = document.getElementById("promo-input");
+            const promoCode = promoInput.value.trim();
+
+            if (promoCode) {
+              // Ví dụ mã WELCOME giảm 10%
+              if (promoCode === "WELCOME") {
+                // Tính lại giá
+                const subtotal = cart.reduce(
+                  (total, item) => total + item.price * item.quantity,
+                  0
+                );
+                const discount = subtotal * 0.1; // Giảm 10%
+                const newTotal = subtotal + 30000 - discount;
+
+                // Cập nhật hiển thị
+                document.getElementById("total").textContent =
+                  formatCurrency(newTotal);
+                showNotification("Đã áp dụng mã giảm giá WELCOME - Giảm 10%");
+              } else {
+                showNotification("Mã giảm giá không hợp lệ!");
+              }
+              promoInput.value = "";
+            }
+          });
+        }
+
+        // Khởi tạo hiển thị giỏ hàng
+        renderCartPage();
+
+        // Cập nhật giỏ hàng mỗi khi có thay đổi
+        const originalRenderCart = window.renderCart;
+        window.renderCart = function () {
+          if (originalRenderCart) originalRenderCart();
+          renderCartPage();
+        };
+      });
+
+      // Hiển thị thông báo
+      function showNotification(message) {
+        const notification = document.getElementById("notification");
+        notification.textContent = message;
+        notification.classList.add("show");
+
+        setTimeout(function () {
+          notification.classList.remove("show");
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
