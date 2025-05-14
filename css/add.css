@@ -1,0 +1,85 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+form {
+  width: 500px;
+  margin: 0 auto;
+}
+
+form h1 {
+  text-align: center;
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.image-upload-box {
+  display: block;
+  border: 1px dashed #aaa;
+  padding: 10px;
+  text-align: center;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.btn-group {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-group button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-group button[type="reset"] {
+  background-color: #e74c3c;
+}
+
+.image-preview-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#imagePreview {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    display: none;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 8px;
+}
