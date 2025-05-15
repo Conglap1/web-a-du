@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <%- include('../elements/head') %> 
+</head>
+
+<body>
+  <%- include('../elements/header') %> 
+
+
+  <!-- Đây là nơi nội dung từng trang sẽ được chèn vào -->
+  <main>
+    <%- body %>
+  </main>
+
+  <%- include('../elements/footer') %> 
+
+   <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang"><i
+            class="fa-solid fa-caret-up"></i></button>
+    <script src="/javascripts/index.js"></script>
+</body>
+
+</html>

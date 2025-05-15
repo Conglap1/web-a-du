@@ -1,57 +1,54 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const expressLayouts = require('express-ejs-layouts');
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-// Import Routers
-const indexRouter = require('./routes/HomePage/index');
-const paymentRouter = require('./routes/HomePage/pay');
-const dungcuRouter = require('./routes/HomePage/dungcu');
-const sachRouter = require('./routes/HomePage/sach');
-const quatangRouter = require('./routes/HomePage/quatang');
-const lienheRouter = require('./routes/HomePage/lienhe');
-const huongdandathangRouter = require('./routes/HomePage/huongdandathang');
+//express-ejs-layouts de custom layout co dinh va thay doi noi dung trong <%- body %>
+var expressLayouts = require('express-ejs-layouts');
 
-const app = express();
+//goi cac Router
+var LienHe = require('./routes/HomePage/lienHe.js');
+var paymentRouter=require('./routes/HomePage/home.js');
+var homeRouter = require('./routes/HomePage/home'); // Import router cho trang chủ
 
-// View Engine Setup
+var app = express();
+
+// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//su dung expresslayouts
 app.use(expressLayouts);
 
-// Routes
-app.use('/', indexRouter);
-app.use('/pay', paymentRouter);
-app.use('/dungcu', dungcuRouter);
-app.use('/sach', sachRouter);
-app.use('/quatang', quatangRouter);
-app.use('/lienhe', lienheRouter);
-app.use('/huongdandathang', huongdandathangRouter);
+// Chỉ định layout mặc định
+app.set('layout', 'Layout/layout');
 
-// Catch 404 and Forward to Error Handler
-app.use((req, res, next) => {
+app.use('/lienhe', LienHe);
+app.use('/pay', paymentRouter);
+app.use('/', homeRouter); // Định nghĩa route cho đường dẫn "/"
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// Error Handler
-app.use((err, req, res, next) => {
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
   res.status(err.status || 500);
   res.render('error', { title: 'Lỗi' });
-});
-
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+  
 });
 
 module.exports = app;
