@@ -19,6 +19,11 @@
    <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang"><i
             class="fa-solid fa-caret-up"></i></button>
     <script src="/javascripts/index.js"></script>
+    <script type="module">
+      import { handleRegister, handleLogin } from '/javascripts/access.js';
+      document.querySelector("#register-modal form")?.addEventListener("submit", handleRegister);
+      document.querySelector("#login-modal form")?.addEventListener("submit", handleLogin);
+    </script>
 </body>
 
 </html>
