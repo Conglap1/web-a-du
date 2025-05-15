@@ -67,14 +67,15 @@ export async function handleLogin(e) {
       setCookie("customer_id", data.metadata.User._id);
       setCookie("accessToken", data.metadata.tokens.accessToken);
       setCookie("email", email);
+      setCookie("userName", data.metadata.User.UserName);
 
-      document.getElementById("login-modal").style.display = "none";
-      document.body.style.overflow = "auto";
-
-      showNotification("Đăng nhập thành công!");
-      setTimeout(() => {
-        window.location.reload();
-      }, 800);
+      // Kiểm tra roles
+      const roles = data.metadata.User.roles || [];
+      if (roles.includes("admin")) {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = "/home";
+      }
     } else {
       alert(data.message || "Đăng nhập thất bại!");
     }
@@ -116,7 +117,15 @@ function showNotification(message) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  updateHeaderProfile();
+  // Gắn lại sự kiện logout cho admin nếu có nút này trên trang
+  const logoutButton = document.getElementById("logout-button");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      handleLogout();
+    });
+  }
+  updateHeaderProfile(); // vẫn giữ cho trang home/profile
 });
 
 function updateHeaderProfile() {
@@ -180,11 +189,35 @@ function attachProfileEvents() {
   if (logoutButton) {
     logoutButton.addEventListener("click", function (e) {
       e.preventDefault();
-      eraseCookie("customer_id");
-      eraseCookie("accessToken");
-      eraseCookie("email");
-      eraseCookie("userName");
-      window.location.reload();
+      handleLogout();
     });
   }
+}
+
+async function handleLogout() {
+  const customerId = getCookie("customer_id");
+  const accessToken = getCookie("accessToken");
+  if (!customerId || !accessToken) {
+    window.location.href = "/";
+    return;
+  }
+  try {
+    await fetch("http://localhost:3056/v1/api/BookStore/Logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-client-id": customerId,
+        "Authorization": accessToken
+      }
+    });
+  } catch (err) {
+    // Có thể show thông báo lỗi nếu cần
+  }
+  // Xóa cookie
+  eraseCookie("customer_id");
+  eraseCookie("accessToken");
+  eraseCookie("email");
+  eraseCookie("userName");
+  // Chuyển hướng về trang profile
+  window.location.href = "/";
 }

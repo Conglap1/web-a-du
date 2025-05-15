@@ -1,0 +1,239 @@
+<form id="add-product-form" enctype="multipart/form-data">
+    <h1>Thêm Sản Phẩm</h1>
+    <div class="column">
+        <label>Tên sản phẩm*</label>
+        <input type="text" name="name" required>
+
+        <label>Hình ảnh*</label>
+        <label for="imageInput" class="image-upload-box" id="imageUploadBox">
+            <input type="file" class="form-control-file" id="imageInput" name="product_thumb" accept="image/*" hidden>
+            <div id="uploadContent">
+                <div style="font-size: 24px;">⬆️</div>
+                <div><strong>Tải lên</strong></div>
+                <div class="placeholder">click để tải hình ảnh lên</div>
+            </div>
+            <img id="imagePreview" src="#" alt="Preview"
+                style="display: none; width: 100px; height: 100px; object-fit: cover; margin-top: 10px;">
+        </label>
+
+        <label>Giá</label>
+        <input type="text" min="10001" name="price" required>
+
+        <label>Số lượng*</label>
+        <input type="number" min="1" name="quantity" required>
+    </div>
+
+    <div class="column">
+        <label>Danh mục</label>
+        <select name="product_type" id="categorySelect" required>
+            <option value="" disabled selected>Chọn danh mục</option>
+            <option value="Book">Sách</option>
+            <option value="Stationery">Dụng cụ</option>
+            <option value="Gift">Quà tặng</option>
+        </select>
+
+        <div id="bookFields" class="hidden">
+            <label>Tiêu đề*</label><input type="text" name="title" required>
+            <label>Tác giả*</label><input type="text" name="author" required>
+            <label>NXB*</label><input type="text" name="publisher" required>
+            <label>Năm XB*</label><input type="number" min="1" name="publication_year" required>
+            <label>ISBN*</label><input type="text" name="isbn" required>
+            <label>Thể loại*</label>
+            <select name="genre" required>
+                <option>Fiction</option>
+                <option>Non-Fiction</option>
+                <option>Science</option>
+                <option>Children</option>
+                <option>Biography</option>
+                <option>Fantasy</option>
+                <option>Mystery</option>
+                <option>Education</option>
+            </select>
+            <label>Ngôn ngữ*</label>
+            <select name="language" required>
+                <option>Tiếng Việt</option>
+                <option>Tiếng Anh</option>
+                <option>Tiếng Pháp</option>
+                <option>Tiếng Nhật</option>
+                <option>Tiếng Hàn</option>
+            </select>
+            <label>Định dạng*</label>
+            <select name="format" required>
+                <option>Hardcover</option>
+                <option>Paperback</option>
+                <option>Ebook</option>
+            </select>
+        </div>
+
+        <div id="stationeryFields" class="hidden">
+            <label>Loại*</label>
+            <select name="type" required>
+                <option>Pen</option>
+                <option>Pencil</option>
+                <option>Ruler</option>
+                <option>Notebook</option>
+                <option>Eraser</option>
+                <option>Highlighter</option>
+                <option>Glue</option>
+                <option>Scissors</option>
+            </select>
+            <label>Thương hiệu</label><input type="text" name="brand">
+            <label>Màu sắc</label><input type="text" name="color">
+            <label>Chất liệu</label><input type="text" name="material">
+            <label>Kích thước</label><input type="text" name="size">
+            <label>Số lượng/gói</label><input type="number" min="1" name="pack_quantity">
+        </div>
+
+        <div id="giftFields" class="hidden">
+            <label >Loại quà</label><input type="text">
+            <label >Tên hộp quà</label><input type="text">
+            <label >Số lượng</label><input type="number" min="1">
+            <label>Màu hộp</label><input type="text" name="gift_box_color">
+            <label>Dịp tặng</label>
+            <select name="occasion">
+                <option>Birthday</option>
+                <option>Christmas</option>
+                <option>NewYear</option>
+                <option>Graduation</option>
+                <option>Other</option>
+            </select>
+            <label>Loại bao bì</label>
+            <select name="packaging_type">
+                <option>Box</option>
+                <option>Bag</option>
+                <option>Wrap</option>
+            </select>
+        </div>
+    </div>
+    <div class="btn-group">
+        <button type="reset">Hủy</button>
+        <button type="submit">Lưu</button>
+    </div>
+</form>
+<script>
+    // Xử lý ảnh khi chọn file
+    const imageInput = document.getElementById("imageInput");
+    const imagePreview = document.getElementById("imagePreview");
+    const uploadContent = document.getElementById("uploadContent");
+
+    imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = "block";
+                uploadContent.style.display = "none";
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function cancelImage() {
+        imageInput.value = "";
+        imagePreview.src = "#";
+        imagePreview.style.display = "none";
+        uploadContent.style.display = "block";
+    }
+
+    // Ẩn/hiện các phần nhập thêm theo danh mục
+    const categorySelect = document.getElementById("categorySelect");
+    const bookFields = document.getElementById("bookFields");
+    const stationeryFields = document.getElementById("stationeryFields");
+    const giftFields = document.getElementById("giftFields");
+
+    categorySelect.addEventListener("change", function () {
+        bookFields.classList.add("hidden");
+        stationeryFields.classList.add("hidden");
+        giftFields.classList.add("hidden");
+
+        if (this.value === "Book") bookFields.classList.remove("hidden");
+        else if (this.value === "Stationery") stationeryFields.classList.remove("hidden");
+        else if (this.value === "Gift") giftFields.classList.remove("hidden");
+    });
+
+    document.getElementById("add-product-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+
+  // Lấy accessToken và customer_id từ cookie
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+    return null;
+  }
+  const accessToken = getCookie("accessToken");
+  const customerId = getCookie("customer_id");
+
+  // Thu thập các trường chung
+  const product_type = formData.get("product_type");
+  const product_name = formData.get("name");
+  const product_thumb = formData.get("product_thumb");
+  const product_price = formData.get("price");
+  const product_quantity = formData.get("quantity");
+  const product_description = formData.get("description");
+
+  // Thu thập các trường đặc thù
+  let product_attributes = {};
+  if (product_type === "Book") {
+    product_attributes = {
+      title: formData.get("title"),
+      author: formData.get("author"),
+      publisher: formData.get("publisher"),
+      publication_year: formData.get("publication_year"),
+      isbn: formData.get("isbn"),
+      genre: formData.get("genre"),
+      language: formData.get("language"),
+      format: formData.get("format")
+    };
+  } else if (product_type === "Stationery") {
+    product_attributes = {
+      type: formData.get("type"),
+      brand: formData.get("brand"),
+      color: formData.get("color"),
+      material: formData.get("material"),
+      size: formData.get("size"),
+      pack_quantity: formData.get("pack_quantity")
+    };
+  } else if (product_type === "Gift") {
+    product_attributes = {
+      gift_box_color: formData.get("gift_box_color"),
+      occasion: formData.get("occasion"),
+      packaging_type: formData.get("packaging_type")
+      // Thêm các trường khác nếu cần
+    };
+  }
+
+  // Tạo FormData mới để gửi lên server
+  const sendForm = new FormData();
+  sendForm.append("product_type", product_type);
+  sendForm.append("product_name", product_name); // Đúng tên trường backend
+  sendForm.append("product_thumb", product_thumb); // file
+  sendForm.append("product_price", product_price); // Đúng tên trường backend
+  sendForm.append("product_quantity", product_quantity); // Đúng tên trường backend
+  if (product_description) sendForm.append("product_description", product_description);
+  sendForm.append("product_attributes", JSON.stringify(product_attributes));
+
+  try {
+    const response = await fetch("http://localhost:3056/v1/api/product", {
+      method: "POST",
+      headers: {
+        "Authorization": accessToken,
+        "x-client-id": customerId
+        // KHÔNG set Content-Type khi gửi FormData!
+      },
+      body: sendForm
+    });
+    const result = await response.json();
+    if (response.ok) {
+      alert("Thêm sản phẩm thành công!");
+    } else {
+      alert(result.message || "Thêm sản phẩm thất bại!");
+    }
+  } catch (err) {
+    alert("Lỗi kết nối server!");
+  }
+});
+</script>

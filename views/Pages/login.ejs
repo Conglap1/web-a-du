@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập - BookStore</title>
+  <link rel="stylesheet" href="/stylesheets/profile-card.css">
+</head>
+<body>
+  <div class="profile-card">
+    <div class="profile-logo">
+      <img src="/images/logo.png" alt="BookStore Logo">
+    </div>
+    <h2>Chào mừng đến với BookStore</h2>
+    <button id="show-login-form" class="btn-main">Đăng nhập</button>
+    <p>Bạn chưa có tài khoản? <a href="/signup">Đăng ký</a></p>
+    <form id="login-form" style="display:none;">
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Mật khẩu" required>
+      <button type="submit" class="btn-main">Đăng nhập</button>
+    </form>
+  </div>
+  <script type="module" src="/javascripts/login.js"></script>
+</body>
+</html>

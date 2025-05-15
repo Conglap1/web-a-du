@@ -1,0 +1,47 @@
+
+<div class="admin-dashboard">
+  <h1 class="dashboard-title">Danh sách sản phẩm</h1>
+  <div id="product-list" class="product-list"></div>
+</div>
+<script>
+  // Giả lập fetch sản phẩm từ server (bạn thay bằng fetch thực tế)
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/products') // Đổi thành API thực tế của bạn
+      .then(res => res.json())
+      .then(data => renderProducts(data))
+      .catch(() => {
+        // Nếu không có API, demo tạm
+        renderProducts([
+          {id: 1, name: 'Áo Bếp', price: '350.000đ', image: '/images/no01.jpg'},
+          {id: 2, name: 'Sách Toán', price: '120.000đ', image: '/images/no02.jpg'}
+        ]);
+      });
+  });
+
+  function renderProducts(products) {
+    const list = document.getElementById('product-list');
+    list.innerHTML = products.map(p => `
+      <div class="product-card">
+        <img src="${p.image}" alt="${p.name}">
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <div class="product-price">${p.price}</div>
+          <div class="product-actions">
+            <button onclick="editProduct('${p.id}')"><i class="fa fa-edit"></i> Sửa</button>
+            <button onclick="deleteProduct('${p.id}')"><i class="fa fa-trash"></i> Xóa</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function editProduct(id) {
+    window.location.href = '/admin/edit-product?id=' + id;
+  }
+  function deleteProduct(id) {
+    if (confirm('Bạn chắc chắn muốn xóa sản phẩm này?')) {
+      // Gọi API xóa ở đây
+      alert('Đã xóa sản phẩm ' + id);
+    }
+  }
+</script>

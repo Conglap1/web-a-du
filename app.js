@@ -12,6 +12,9 @@ var LienHe = require('./routes/HomePage/lienHe.js');
 var paymentRouter=require('./routes/HomePage/home.js');
 var homeRouter = require('./routes/HomePage/home'); // Import router cho trang chủ
 
+// Ví dụ: router cho admin dùng layout riêng
+const adminRouter = require('./routes/admin/admin.js');
+
 var app = express();
 
 // view engine setup
@@ -30,9 +33,34 @@ app.use(expressLayouts);
 // Chỉ định layout mặc định
 app.set('layout', 'Layout/layout');
 
-app.use('/lienhe', LienHe);
-app.use('/pay', paymentRouter);
-app.use('/', homeRouter); // Định nghĩa route cho đường dẫn "/"
+// Router cho admin, dùng layout riêng
+app.use('/admin', function(req, res, next) {
+  // Đặt layout riêng cho admin (chữ thường 'layout')
+  app.set('layout', 'admin/layout/layout');
+  next();
+}, adminRouter);
+
+// Các router khác dùng layout mặc định
+app.use('/lienhe', function(req, res, next) {
+  app.set('layout', 'Layout/layout');
+  next();
+}, LienHe);
+
+
+// Thay đổi router cho homepage
+app.use('/home', function(req, res, next) {
+  app.set('layout', 'Layout/layout');
+  next();
+}, homeRouter);
+
+// Trang profile team ở '/'
+app.get('/', function(req, res) {
+  res.render('Pages/profile', { 
+    title: 'Team Profile',
+    layout: 'Layout/profileLayout' // Dùng layout riêng, không có header/nav
+  });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

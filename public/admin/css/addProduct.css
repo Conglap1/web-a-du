@@ -1,0 +1,117 @@
+.hidden {
+  display: none;
+}
+form {
+  width: 600px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44,83,100,0.10);
+  padding: 36px 40px 28px 40px;
+  transition: box-shadow 0.2s;
+  border: 1px solid #e5e7eb;
+}
+
+form:hover {
+  box-shadow: 0 16px 48px rgba(44,83,100,0.16);
+}
+
+form h1 {
+  text-align: center;
+  margin-bottom: 28px;
+  color: #2563eb;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+form label {
+  display: block;
+  margin-top: 18px;
+  font-weight: 500;
+  color: #374151;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 11px;
+  margin-top: 6px;
+  box-sizing: border-box;
+  border: 1.5px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  border: 1.5px solid #2563eb;
+  outline: none;
+  background: #fff;
+}
+
+.image-upload-box {
+  display: block;
+  border: 2px dashed #d1d5db;
+  padding: 22px;
+  text-align: center;
+  margin-top: 18px;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #f9fafb;
+  transition: border 0.2s, background 0.2s;
+  position: relative;
+}
+.image-upload-box:hover {
+  border: 2px solid #2563eb;
+  background: #e0e7ff;
+}
+#imagePreview {
+  display: block;
+  margin: 12px auto 0;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(44,83,100,0.10);
+}
+
+.btn-group {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.btn-group button {
+  padding: 11px 36px;
+  margin: 0 14px;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(44,83,100,0.08);
+}
+
+.btn-group button[type="reset"] {
+  background-color: #e11d48;
+}
+
+.btn-group button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 700px) {
+  form {
+    width: 98vw;
+    padding: 18px 6vw;
+  }
+}

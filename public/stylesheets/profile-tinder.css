@@ -1,0 +1,190 @@
+ body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: "Poppins", "Product Sans", sans-serif;
+      background: url('/images/bg-tinder.png') center center/cover no-repeat fixed;
+      /* Đổi tên file ảnh nền thành bg-tinder.png, bạn hãy lưu ảnh đó vào /public/images/ */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .profile-container {
+      background: rgba(255,255,255,0.85);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(44,83,100,0.18);
+      padding: 48px 32px 32px 32px;
+      min-width: 340px;
+      max-width: 95vw;
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo {
+      width: 120px;
+      margin-bottom: 18px;
+    }
+    .tinder-main h1 {
+      font-size: 2.5rem;
+      color: #16a085;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    .team-profiles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .profile-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(44,83,100,0.10);
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 180px;
+      max-width: 220px;
+      transition: transform 0.2s;
+    }
+    .profile-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(44,83,100,0.18);
+    }
+    .profile-card img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+      border: 3px solid #16a085;
+    }
+    .profile-info h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #16a085;
+      font-weight: 600;
+    }
+    .profile-info p {
+      margin: 4px 0 0 0;
+      color: #555;
+      font-size: 1rem;
+    }
+    .login-btn, .create-account-btn {
+      background: linear-gradient(90deg,#16a085,#1abc9c);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 8px 8px 0 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 10px;
+    }
+    .login-btn:hover, .create-account-btn:hover {
+      background: linear-gradient(90deg,#1abc9c,#16a085);
+    }
+    @media (max-width: 700px) {
+      .profile-container { padding: 24px 6vw; }
+      .team-profiles { flex-direction: column; gap: 18px; }
+    }
+    /* Modal giữ nguyên như trước */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 32px 32px 32px;
+      box-shadow: 0 8px 32px rgba(44,83,100,0.18);
+      min-width: 340px;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .modal h2 {
+      margin-bottom: 24px;
+      color: #16a085;
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .modal form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .modal input {
+      padding: 14px 18px;
+      border: 1.5px solid #b2dfdb;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      background: #f7fafc;
+      transition: border 0.2s;
+      outline: none;
+    }
+    .modal input:focus {
+      border: 1.5px solid #16a085;
+      background: #fff;
+    }
+    .modal .btn {
+      background: linear-gradient(90deg,#16a085,#1abc9c);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal .btn:hover {
+      background: linear-gradient(90deg,#1abc9c,#16a085);
+    }
+    .close-btn {
+      position: absolute;
+      top: 16px; right: 18px;
+      font-size: 1.8rem;
+      color: #aaa;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .close-btn:hover { color: #16a085; }
+    .register-link, .login-link {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .register-link a, .login-link a {
+      color: #16a085;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .register-link a:hover, .login-link a:hover {
+      text-decoration: underline;
+    }
