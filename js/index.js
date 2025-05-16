@@ -181,30 +181,39 @@ document.addEventListener("DOMContentLoaded", function () {
 function checkLoginStatus() {
   const loggedIn = localStorage.getItem("loggedIn") === "true";
   const username = localStorage.getItem("username");
-  const loginContainer = document.querySelector(".right");
+  const loginContainer = document.querySelector(".login"); // Target the parent <ul class="login">
 
-  if (loggedIn && username && loginContainer) {
+  if (!loginContainer) return; // Exit if loginContainer isn't found
+
+  // Remove existing login-related <li> elements to avoid duplication
+  const loginItems = loginContainer.querySelectorAll(".right");
+  loginItems.forEach((item) => item.remove());
+
+  if (loggedIn && username) {
     // Người dùng đã đăng nhập
-    loginContainer.innerHTML = `
-            <li class="user-profile">
-                <div class="user-avatar" id="user-menu-toggle">
-                    <span>${getInitials(username)}</span>
-                </div>
-                <div class="user-dropdown" id="user-dropdown">
-                    <div class="user-info">
-                        <div class="user-avatar-large">
-                            <span>${getInitials(username)}</span>
-                        </div>
-                        <h4>${username}</h4>
-                    </div>
-                    <ul class="user-menu">
-                        <li><a href="#"><i class="fa-solid fa-user"></i> Trang cá nhân</a></li>
-                        <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt</a></li>
-                        <li><a href="#" id="logout-button"><i class="fa-solid fa-sign-out-alt"></i> Đăng xuất</a></li>
-                    </ul>
-                </div>
-            </li>
-        `;
+    const userProfileLi = document.createElement("li");
+    userProfileLi.className = "right";
+    userProfileLi.innerHTML = `
+      <li class="user-profile">
+        <div class="user-avatar" id="user-menu-toggle">
+          <span>${getInitials(username)}</span>
+        </div>
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="user-info">
+            <div class="user-avatar-large">
+              <span>${getInitials(username)}</span>
+            </div>
+            <h4>${username}</h4>
+          </div>
+          <ul class="user-menu">
+            <li><a href="#"><i class="fa-solid fa-user"></i> Trang cá nhân</a></li>
+            <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt</a></li>
+            <li><a href="#" id="logout-button"><i class="fa-solid fa-sign-out-alt"></i> Đăng xuất</a></li>
+          </ul>
+        </div>
+      </li>
+    `;
+    loginContainer.appendChild(userProfileLi);
 
     // Thêm sự kiện cho user-menu-toggle
     const userMenuToggle = document.getElementById("user-menu-toggle");
@@ -238,12 +247,18 @@ function checkLoginStatus() {
         showNotification("Đăng xuất thành công!");
       });
     }
-  } else if (loginContainer) {
+  } else {
     // Người dùng chưa đăng nhập
-    loginContainer.innerHTML = `
-            <li><a href="#" id="register-button">Đăng Ký</a></li>
-            <li><a href="#" id="login-button">Đăng Nhập</a></li>
-        `;
+    const registerLi = document.createElement("li");
+    registerLi.className = "right";
+    registerLi.innerHTML = '<a href="#" id="register-button">Đăng Ký</a>';
+
+    const loginLi = document.createElement("li");
+    loginLi.className = "right";
+    loginLi.innerHTML = '<a href="#" id="login-button">Đăng Nhập</a>';
+
+    loginContainer.appendChild(registerLi);
+    loginContainer.appendChild(loginLi);
 
     // Thêm lại sự kiện cho nút đăng ký/đăng nhập
     const registerButton = document.getElementById("register-button");

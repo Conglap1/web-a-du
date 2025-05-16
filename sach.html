@@ -1,95 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Cộng đồng chia sẻ nguồn giải trí và công nghệ</title>
-    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <header>
-        <!-- login -->
-        <ul class="login">
-            <div class="left">
-                <li><a href="index.html" id="logo"><img src="img/logo.png" alt="logo"></a></li>
-            </div>
-            <div class="right">
-                <li><a href="#" id="register-button">Đăng Ký</a></li>
-                <li><a href="#" id="login-button">Đăng Nhập</a></li>
-            </div>
+      <!-- thanh đăng nhập + logo + giỏ hàng -->
+      <ul class="login">
+        <!-- logo – đẩy mọi thứ sang phải nhờ margin-right:auto -->
+        <li class="left" style="margin-right: auto">
+          <a href="index.html" id="logo">
+            <img src="img/logo.png" alt="logo" />
+          </a>
+        </li>
+
+        <!-- icon giỏ hàng (đã dùng đúng .cart-icon-container) -->
+        <li class="cart-icon-container">
+          <!-- dùng href="cart.html" nếu muốn chuyển trang, 
+               hoặc href="#" + JS openCartModal() nếu muốn bật modal -->
+          <a href="cart.html" id="cart-button">
+            <i class="fa-solid fa-shopping-cart cart-icon"></i>
+            <!-- .cart-count ẩn mặc định (CSS sẽ show khi >0) -->
+            <span class="cart-count" id="cart-count" style="display: none"
+              >0</span
+            >
+          </a>
+        </li>
+
+        <!-- nút đăng ký / đăng nhập -->
+        <li class="right"><a href="#" id="register-button">Đăng Ký</a></li>
+        <li class="right"><a href="#" id="login-button">Đăng Nhập</a></li>
+      </ul>
+
+      <!-- ====== NAV + SEARCH giữ nguyên ====== -->
+      <div class="nav-container">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav">
+          <li><a href="index.html">Trang Chủ</a></li>
+          <li><a href="index.html#gioithieu">Giới Thiệu</a></li>
+          <li><a href="sach.html">Sách</a></li>
+          <li><a href="dungcu.html">Dụng cụ</a></li>
+          <li><a href="quatang.html">Quà tặng</a></li>
+          <li><a href="lienhe.html">Liên Hệ</a></li>
         </ul>
 
-
-        <!-- nav + search -->
-        <div class="nav-container">
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-            <ul class="nav">
-                <li><a href="index.html">Trang Chủ</a></li>
-                <li><a href="index.html#gioithieu">Giới Thiệu</a></li>
-                <li><a href="sach.html">Sách</a></li>
-                <li><a href="dungcu.html">Dụng cụ</a></li>
-                <li><a href="quatang.html">Quà tặng</a></li>
-                <li><a href="lienhe.html">Liên Hệ</a></li>
-            </ul>
-
-
-            <div class="search">
-                <input type="text" placeholder="Search..">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
+        <div class="search">
+          <input type="text" placeholder="Search.." />
+          <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
+      </div>
     </header>
 
     <footer class="footer">
-        <div class="container-footer">
-            <div class="footer-col">
-
-                <div class="title">
-                    <a href="index.html"><img src="img/logo.png" alt="logo"></a>
-                    <h2>WebStorage</h2>
-                </div>
-                <p>Cộng đồng chia sẻ nội dung, kiến thức hữu ích về công nghệ và giải trí.</p>
-            </div>
-
-            <div class="footer-col">
-                <h3>Liên hệ</h3>
-                <ul>
-                    <li><span><i class="fa-solid fa-phone"></i></span> +84901621897</li>
-                    <li><span><i class="fa-solid fa-circle-user"></i></span> Phan Công Lập</li>
-                    <li><span><i class="fa-solid fa-circle-info"></i></span> D22_TH09</li>
-                    <li><span><i class="fa-solid fa-paper-plane"></i></span> DH52200978@student.stu.edu.vn</li>
-                    <li><span><i class="fa-solid fa-film"></i></span> Thứ 2 ca 1</li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Mạng xã hội</h3>
-                <p>Theo dõi các mạng xã hội để có được những thông tin mới nhất</p>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/eqrf04552" class="facebook">f</a>
-                    <a href="#" class="pinterest">p</a>
-                    <a href="#" class="linkedin">in</a>
-                </div>
-            </div>
-
+      <div class="container-footer">
+        <div class="footer-col">
+          <div class="title">
+            <a href="index.html"><img src="img/logo.png" alt="logo" /></a>
+            <h2>WebStorage</h2>
+          </div>
+          <p>
+            Cộng đồng chia sẻ nội dung, kiến thức hữu ích về công nghệ và giải
+            trí.
+          </p>
         </div>
-        <div class="footer-bottom">
-            <p>Copyright © 2014 - 2025. All rights reserved by WebStorage</p>
+
+        <div class="footer-col">
+          <h3>Liên hệ</h3>
+          <ul>
+            <li>
+              <span><i class="fa-solid fa-phone"></i></span> +84901621897
+            </li>
+            <li>
+              <span><i class="fa-solid fa-circle-user"></i></span> Phan Công Lập
+            </li>
+            <li>
+              <span><i class="fa-solid fa-circle-info"></i></span> D22_TH09
+            </li>
+            <li>
+              <span><i class="fa-solid fa-paper-plane"></i></span>
+              DH52200978@student.stu.edu.vn
+            </li>
+            <li>
+              <span><i class="fa-solid fa-film"></i></span> Thứ 2 ca 1
+            </li>
+          </ul>
         </div>
+
+        <div class="footer-col">
+          <h3>Mạng xã hội</h3>
+          <p>Theo dõi các mạng xã hội để có được những thông tin mới nhất</p>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/eqrf04552" class="facebook">f</a>
+            <a href="#" class="pinterest">p</a>
+            <a href="#" class="linkedin">in</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Copyright © 2014 - 2025. All rights reserved by WebStorage</p>
+      </div>
     </footer>
-    <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang"><i
-            class="fa-solid fa-caret-up"></i></button>
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang">
+      <i class="fa-solid fa-caret-up"></i>
+    </button>
 
     <script src="js/index.js"></script>
-</body>
-
+  </body>
 </html>

@@ -1,18 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>Cộng đồng chia sẻ nguồn giải trí và công nghệ</title>
-  <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/cart.css" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Cộng đồng chia sẻ nguồn giải trí và công nghệ</title>
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="32x32" />
+  </head>
+
+  <body>
+    <header>
+      <!-- thanh đăng nhập + logo + giỏ hàng -->
+      <ul class="login">
+        <!-- logo – đẩy mọi thứ sang phải nhờ margin-right:auto -->
+        <li class="left" style="margin-right: auto">
+          <a href="index.html" id="logo">
+            <img src="img/logo.png" alt="logo" />
+          </a>
+        </li>
+
+        <!-- icon giỏ hàng (đã dùng đúng .cart-icon-container) -->
+        <li class="cart-icon-container">
+          <!-- dùng href="cart.html" nếu muốn chuyển trang, 
+             hoặc href="#" + JS openCartModal() nếu muốn bật modal -->
+          <a href="cart.html" id="cart-button">
+            <i class="fa-solid fa-shopping-cart cart-icon"></i>
+            <!-- .cart-count ẩn mặc định (CSS sẽ show khi >0) -->
+            <span class="cart-count" id="cart-count" style="display: none"
+              >0</span
+            >
+          </a>
+        </li>
+
+        <!-- nút đăng ký / đăng nhập -->
+        <li class="right"><a href="#" id="register-button">Đăng Ký</a></li>
+        <li class="right"><a href="#" id="login-button">Đăng Nhập</a></li>
+      </ul>
+
+      <!-- ====== NAV + SEARCH giữ nguyên ====== -->
+      <div class="nav-container">
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav">
+          <li><a href="index.html">Trang Chủ</a></li>
+          <li><a href="index.html#gioithieu">Giới Thiệu</a></li>
+          <li><a href="sach.html">Sách</a></li>
+          <li><a href="dungcu.html">Dụng cụ</a></li>
+          <li><a href="quatang.html">Quà tặng</a></li>
+          <li><a href="lienhe.html">Liên Hệ</a></li>
+        </ul>
+
 
 <body>
   <header>
@@ -341,17 +392,19 @@
         </p>
       </div>
     </div>
-    <div class="game-item">
-      <div class="game-thumbnail no03"></div>
-      <div class="game-info">
-        <h3>Bút ký tặng</h3>
-        <p class="description">
-          <strong>Mô tả:</strong><br />Bút ký cao cấp, có thể khắc tên theo
-          yêu cầu
-        </p>
-      </div>
-    </div>
-  </div>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container-footer">
+        <div class="footer-col">
+          <div class="title">
+            <a href="index.html"><img src="img/logo.png" alt="logo" /></a>
+            <h2>WebStorage</h2>
+          </div>
+          <p>
+            Cộng đồng chia sẻ nội dung, kiến thức hữu ích về công nghệ và giải
+            trí.
+          </p>
+        </div>
 
 
 
@@ -400,16 +453,14 @@
           <a href="#" class="linkedin">in</a>
         </div>
       </div>
+    </footer>
+    <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang">
+      <i class="fa-solid fa-caret-up"></i>
+    </button>
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="cart-notification" style="display: none">
+      Đã thêm vào giỏ hàng!
     </div>
-    <div class="footer-bottom">
-      <p>Copyright © 2014 - 2025. All rights reserved by WebStorage</p>
-    </div>
-  </footer>
-  <button onclick="scrollToTop()" id="scrollTopBtn" title="Lên đầu trang">
-    <i class="fa-solid fa-caret-up"></i>
-  </button>
 
-  <script src="js/index.js"></script>
-</body>
 
 </html>
