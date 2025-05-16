@@ -343,3 +343,63 @@ window.onscroll = function () {
       ? "block"
       : "none";
 };
+
+
+async function fetchProducts() {
+  try {
+    const response = await fetch('/api/products');
+    const products = await response.json();
+
+    const tbody = document.getElementById('productTableBody');
+    tbody.innerHTML = ''; // Xóa nội dung cũ
+
+    products.forEach(product => {
+      const row = `
+                        <tr>
+                            <td><img src="${product.image}" alt="${product.name}" width="50" /></td>
+                            <td>${product.name}</td>
+                            <td>${product.price.toLocaleString()} VND</td>
+                            <td><button onclick="handleAction(${product.id})">Thao tác</button></td>
+                        </tr>
+                    `;
+      tbody.innerHTML += row;
+    });
+  } catch (error) {
+    console.error('Lỗi khi fetch sản phẩm:', error);
+  }
+}
+
+function handleAction(productId) {
+  console.log('Thao tác với sản phẩm ID:', productId);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    console.log("HI")
+
+    const formData = new FormData(form);
+    const jsonData = {};
+
+    formData.forEach((value, key) => {
+      jsonData[key] = value;
+    });
+
+    try {
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonData)
+      });
+
+      const result = await response.json();
+      console.log("Server response:", result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
+});
