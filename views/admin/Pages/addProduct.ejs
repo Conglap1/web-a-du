@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/admin/css/addProduct.css">
 <form id="add-product-form" enctype="multipart/form-data">
     <h1>Thêm Sản Phẩm</h1>
     <div class="column">
@@ -77,17 +78,17 @@
                 <option>Glue</option>
                 <option>Scissors</option>
             </select>
-            <label>Thương hiệu</label><input type="text" name="brand">
-            <label>Màu sắc</label><input type="text" name="color">
-            <label>Chất liệu</label><input type="text" name="material">
-            <label>Kích thước</label><input type="text" name="size">
-            <label>Số lượng/gói</label><input type="number" min="1" name="pack_quantity">
+            <label>Thương hiệu</label><input type="text" name="brand" required>
+            <label>Màu sắc</label><input type="text" name="color" required>
+            <label>Chất liệu</label><input type="text" name="material" required>
+            <label>Kích thước</label><input type="text" name="size" required>
+            <label>Số lượng/gói</label><input type="number" min="1" name="pack_quantity" required>
         </div>
 
         <div id="giftFields" class="hidden">
-            <label >Loại quà</label><input type="text">
-            <label >Tên hộp quà</label><input type="text">
-            <label >Số lượng</label><input type="number" min="1">
+            <label>Loại quà</label><input type="text" name="gift_type">
+            <label>Tên hộp quà</label><input type="text" name="gift_box_name">
+            <label>Số lượng</label><input type="number" min="1" name="gift_quantity">
             <label>Màu hộp</label><input type="text" name="gift_box_color">
             <label>Dịp tặng</label>
             <select name="occasion">
@@ -142,15 +143,39 @@
     const stationeryFields = document.getElementById("stationeryFields");
     const giftFields = document.getElementById("giftFields");
 
+    function setRequiredFields(type) {
+        // Book
+        document.querySelectorAll('#bookFields [name]').forEach(el => {
+            if (type === 'Book') el.setAttribute('required', 'required');
+            else el.removeAttribute('required');
+        });
+        // Stationery
+        document.querySelectorAll('#stationeryFields [name]').forEach(el => {
+            if (type === 'Stationery') el.setAttribute('required', 'required');
+            else el.removeAttribute('required');
+        });
+        // Gift
+        document.querySelectorAll('#giftFields [name]').forEach(el => {
+            if (type === 'Gift') el.setAttribute('required', 'required');
+            else el.removeAttribute('required');
+        });
+    }
+
+    // Gọi khi chọn danh mục
     categorySelect.addEventListener("change", function () {
         bookFields.classList.add("hidden");
         stationeryFields.classList.add("hidden");
         giftFields.classList.add("hidden");
 
+        setRequiredFields(this.value);
+
         if (this.value === "Book") bookFields.classList.remove("hidden");
         else if (this.value === "Stationery") stationeryFields.classList.remove("hidden");
         else if (this.value === "Gift") giftFields.classList.remove("hidden");
     });
+
+    // Khi load trang, bỏ hết required ở các trường ẩn
+    setRequiredFields(categorySelect.value);
 
     document.getElementById("add-product-form").addEventListener("submit", async function(e) {
   e.preventDefault();
@@ -174,6 +199,8 @@
   const product_price = formData.get("price");
   const product_quantity = formData.get("quantity");
   const product_description = formData.get("description");
+
+  
 
   // Thu thập các trường đặc thù
   let product_attributes = {};
@@ -199,10 +226,12 @@
     };
   } else if (product_type === "Gift") {
     product_attributes = {
+      gift_type: formData.get("gift_type"),
+      gift_box_name: formData.get("gift_box_name"),
+      gift_quantity: formData.get("gift_quantity"),
       gift_box_color: formData.get("gift_box_color"),
       occasion: formData.get("occasion"),
       packaging_type: formData.get("packaging_type")
-      // Thêm các trường khác nếu cần
     };
   }
 

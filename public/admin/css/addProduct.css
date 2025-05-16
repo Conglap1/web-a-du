@@ -115,3 +115,36 @@ form textarea:focus {
     padding: 18px 6vw;
   }
 }
+form#add-product-form label,
+form#add-product-form input,
+form#add-product-form select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form#add-product-form .column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+#add-product-form label {
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+#add-product-form input,
+#add-product-form select {
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#add-product-form .btn-group {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
